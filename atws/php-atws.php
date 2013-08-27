@@ -3,7 +3,7 @@
  * Created on 27 Aug 2013
  * 
  */
- 
+
 require_once('php-atws-classmap.php'); 
 
 class atws extends SoapClient {
