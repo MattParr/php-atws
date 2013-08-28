@@ -8,30 +8,40 @@ require_once('php-atws-classmap.php');
 
 class atws extends SoapClient {
 
-
 	private $_connected = false;
 	
-		
 	public function atws() {
 		$this->soap_options['classmap'] = ClassMap::getClassMap();
 	}
 
-
 	public function connect($url,$username,$password) {
+		$this->_connected = false;
+		$this->_url = $url;
 		$this->soap_options['login']=$username;
 		$this->soap_options['password']=$password;
 		$this->soap_options['location']=str_replace('wsdl','asmx',strtolower($url));
 		
-		$this->client = new soapclient($url,$this->soap_options);
+		return $this->_connect();
+	}
+
+	private function _connect() {
+		if($this->_connected == true) {
+			return true;
+		}		
+		$this->client = new soapclient($this->_url,$this->soap_options);
 		if($this->client) {
 			$this->_connected = true;
+			return true;
 		}
+		return false;
 	}
+
     public function getObject($objectType) {
     	
     	return new $objectType();
     	
     }
+
 	public function getPicklist( $entity, $picklist ) {
 
 		if (isset($this->picklists[$entity])) {
@@ -94,6 +104,78 @@ class atws extends SoapClient {
 	public function getNewQuery() {
 		return new atwsquery();
 	}
+	
+	public function query($query,$attempt = 1) {
+		if ($attempt > 3) {
+			// We have had two attempts and not got it.
+			// try last time
+			return false;
+		}
+		$ATWSQuery = $this->getObject('Query');
+		if (is_object($query)) {
+		    if (is_a($query, 'atwsquery')) {
+		    	$ATWSQuery->sXML=$query->getQueryXml();
+		    }
+		}
+		else {
+			// treat as passed xml
+			$ATWSQuery->sXML = $query;
+		}
+
+		$this->_connect();
+		try {
+				$result = $this->client->query($ATWSQuery);
+		}
+		catch ( SoapFault $fault ) {
+			// disconnect and retry up to three times
+			// the api servers sometimes just timeout,
+			// so we shouldn't let this break our app
+			$this->_connected = false;
+			// allows downstream logging
+			$this->last_query_fault = $fault;
+			$this->last_query_fault_xml = $ATWSQuery->sXML;
+			return $this->query($ATWSQuery,$attempt++);
+		}
+		$this->last_query_xml=$ATWSQuery->sXML;
+		return $result;
+	}
+	
+	public function getQueryResults($queryOrResults) {
+		if (is_a($queryOrResults,'atwsquery')) {
+			return $this->getQueryResults($this->query($queryOrResults));
+		}
+		if(!isset($queryOrResults->queryResult->ReturnCode)) {
+			// i'm not sure if this can happen or not!
+			return false;
+		}
+		if($queryOrResults->queryResult->ReturnCode == -1) {
+			// the query failed.  set the last query error array and return false
+			if (isset($queryOrResults->queryResult->Errors->ATWSError)) {
+				$this->last_query_error=array();
+				if(is_array($queryOrResults->queryResult->Errors->ATWSError)) {
+					foreach($queryOrResults->queryResult->Errors->ATWSError as $ATWSError) {
+						$this->last_query_error[] = $ATWSError->Message;
+					}					
+				}
+				else {
+					$this->last_query_error[]=$queryOrResults->queryResult->Errors->ATWSError->Message;
+				}
+				$this->last_query_error_xml = $this->last_query_xml;
+				return false;
+			}
+		}
+		if (!isset($queryOrResults->queryResult->EntityResults->Entity)) {
+			return false;
+		}
+		// return an array of entity objects
+		if (is_array($queryOrResults->queryResult->EntityResults->Entity)) {			
+			return 	$queryOrResults->queryResult->EntityResults->Entity;
+		}
+		else {
+			return array($queryOrResults->queryResult->EntityResults->Entity);
+		}
+	}
+	
 }
 
 class atwsquery {
@@ -144,14 +226,15 @@ class atwsquery {
     }
 
     public function reset() {
-        $this->atwsquery();
+        $this->_operations=array();
+        $this->_spaces=3;
+        $this->_xml="";
+        $this->_entity="";
     }
 
  
     public function atwsquery() {
-    	$this->_operations=array();
-        $this->_spaces=3;
-        $this->_xml="";
+		$this->reset();
     }
 
     private function _addFieldCriteria($name,$condition,$value,$udf=false) {

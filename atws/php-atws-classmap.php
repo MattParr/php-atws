@@ -102,12 +102,35 @@ class ClassMap {
 	}
 }
 
-class GetAttachment {
-	public $attachmentId; // long
+class AccountLocation {
+	public $LocationName; // anyType
+	public $AccountID; // anyType
 }
 
-class GetAttachmentResponse {
-	public $GetAttachmentResult; // Attachment
+class AllocationCode {
+	public $GeneralLedgerCode; // anyType
+	public $Department; // anyType
+	public $Name; // anyType
+	public $Type; // anyType
+	public $UseType; // anyType
+	public $Description; // anyType
+	public $Active; // anyType
+	public $UnitCost; // anyType
+	public $UnitPrice; // anyType
+	public $AllocationCodeType; // anyType
+	public $Taxable; // anyType
+	public $ExternalNumber; // anyType
+}
+
+class Appointment {
+	public $ResourceID; // anyType
+	public $Title; // anyType
+	public $StartDateTime; // anyType
+	public $EndDateTime; // anyType
+	public $Description; // anyType
+	public $CreatorResourceID; // anyType
+	public $CreateDateTime; // anyType
+	public $UpdateDateTime; // anyType
 }
 
 class Attachment {
@@ -128,268 +151,31 @@ class AttachmentInfo {
 	public $Publish; // anyType
 }
 
-class CreateAttachment {
-	public $attachment; // Attachment
-}
-
-class CreateAttachmentResponse {
-	public $CreateAttachmentResult; // long
-}
-
-class DeleteAttachment {
-	public $attachmentId; // long
-}
-
-class DeleteAttachmentResponse {
-	public $DeleteAttachmentResult; // string
-}
-
-class QuoteLocation {
-	public $Address1; // anyType
-	public $Address2; // anyType
-	public $City; // anyType
-	public $State; // anyType
-	public $PostalCode; // anyType
-}
-
-class Entity {
-	public $Fields; // ArrayOfField
-	public $id; // long
-	public $UserDefinedFields; // ArrayOfUserDefinedField
-}
-
-class Field {
-	public $Name; // string
-	public $Label; // string
-	public $Type; // string
-	public $Length; // int
-	public $Description; // string
-	public $IsRequired; // boolean
-	public $IsReadOnly; // boolean
-	public $IsQueryable; // boolean
-	public $IsReference; // boolean
-	public $ReferenceEntityType; // string
-	public $IsPickList; // boolean
-	public $PicklistValues; // ArrayOfPickListValue
-	public $PicklistParentValueField; // string
-	public $DefaultValue; // string
-}
-
-class PickListValue {
-	public $Value; // string
-	public $Label; // string
-	public $IsDefaultValue; // boolean
-	public $SortOrder; // int
-	public $parentValue; // string
-}
-
-class UserDefinedField {
-	public $Name; // string
-	public $Value; // string
-}
-
-class AccountLocation {
-	public $LocationName; // anyType
-	public $AccountID; // anyType
-}
-
-class Service {
-	public $Name; // anyType
-	public $Description; // anyType
-	public $UnitPrice; // anyType
-	public $PeriodType; // anyType
-	public $AllocationCodeID; // anyType
-	public $IsActive; // anyType
-	public $CreatorResourceID; // anyType
-	public $UpdateResourceID; // anyType
-	public $CreateDate; // anyType
-	public $LastModifiedDate; // anyType
-	public $VendorAccountID; // anyType
-	public $UnitCost; // anyType
-}
-
-class ServiceBundle {
-	public $Name; // anyType
-	public $Description; // anyType
-	public $old_selected_service_sum; // anyType
-	public $UnitPrice; // anyType
-	public $UnitDiscount; // anyType
-	public $PercentageDiscount; // anyType
-	public $PeriodType; // anyType
-	public $AllocationCodeID; // anyType
-	public $IsActive; // anyType
-	public $CreatorResourceID; // anyType
-	public $UpdateResourceID; // anyType
-	public $CreateDate; // anyType
-	public $LastModifiedDate; // anyType
-	public $UnitCost; // anyType
-}
-
-class ShippingType {
-	public $Name; // anyType
-	public $IsActive; // anyType
-	public $Description; // anyType
-}
-
-class Quote {
-	public $OpportunityID; // anyType
-	public $Name; // anyType
-	public $eQuoteActive; // anyType
-	public $EffectiveDate; // anyType
-	public $ExpirationDate; // anyType
-	public $CreateDate; // anyType
-	public $CreatorResourceID; // anyType
-	public $ContactID; // anyType
-	public $TaxGroup; // anyType
-	public $ProposalProjectID; // anyType
-	public $BillToLocationID; // anyType
-	public $ShipToLocationID; // anyType
-	public $SoldToLocationID; // anyType
-	public $ShippingType; // anyType
-	public $PaymentType; // anyType
-	public $PaymentTerm; // anyType
-	public $ExternalQuoteNumber; // anyType
-	public $PurchaseOrderNumber; // anyType
-	public $Comment; // anyType
-	public $Description; // anyType
-	public $AccountID; // anyType
-	public $CalculateTaxSeparately; // anyType
-	public $GroupByProductCategory; // anyType
-	public $ShowEachTaxInGroup; // anyType
-}
-
-class QuoteItem {
-	public $QuoteID; // anyType
-	public $Type; // anyType
-	public $ProductID; // anyType
-	public $CostID; // anyType
-	public $LaborID; // anyType
-	public $ExpenseID; // anyType
-	public $ShippingID; // anyType
-	public $ServiceID; // anyType
-	public $ServiceBundleID; // anyType
-	public $Name; // anyType
-	public $UnitPrice; // anyType
-	public $UnitCost; // anyType
-	public $Quantity; // anyType
-	public $IsTaxable; // anyType
-	public $IsOptional; // anyType
-	public $PeriodType; // anyType
-	public $Description; // anyType
-	public $UnitDiscount; // anyType
-	public $PercentageDiscount; // anyType
-	public $LineDiscount; // anyType
-}
-
-class PurchaseOrderItem {
-	public $OrderID; // anyType
-	public $ProductID; // anyType
-	public $InventoryLocationID; // anyType
-	public $Quantity; // anyType
-	public $Memo; // anyType
-	public $UnitCost; // anyType
-}
-
-class PurchaseOrder {
-	public $VendorID; // anyType
-	public $Status; // anyType
-	public $CreatorResourceID; // anyType
-	public $CreateDateTime; // anyType
-	public $SubmitDateTime; // anyType
-	public $CancelDateTime; // anyType
-	public $ShipToName; // anyType
-	public $ShipToAddress1; // anyType
-	public $ShipToAddress2; // anyType
-	public $ShipToCity; // anyType
-	public $ShipToState; // anyType
-	public $ShipToPostalCode; // anyType
-	public $GeneralMemo; // anyType
-	public $Phone; // anyType
-	public $Fax; // anyType
-	public $VendorInvoiceNumber; // anyType
-	public $ExternalPONumber; // anyType
-	public $PurchaseForAccountID; // anyType
-	public $ShippingType; // anyType
-	public $ShippingDate; // anyType
-	public $Freight; // anyType
-	public $TaxGroup; // anyType
-	public $PaymentTerm; // anyType
-}
-
-class PurchaseOrderReceive {
-	public $PurchaseOrderItemID; // anyType
-	public $QuantityPreviouslyReceived; // anyType
-	public $QuantityNowReceiving; // anyType
-	public $ReceiveDate; // anyType
-	public $QuantityBackOrdered; // anyType
-	public $ReceivedByResourceID; // anyType
-	public $SerialNumber; // anyType
-}
-
-class InventoryTransfer {
-	public $ProductID; // anyType
-	public $FromLocationID; // anyType
-	public $ToLocationID; // anyType
-	public $QuantityTransferred; // anyType
-	public $TransferByResourceID; // anyType
-	public $TransferDate; // anyType
-	public $Notes; // anyType
-	public $SerialNumber; // anyType
-}
-
-class InventoryItemSerialNumber {
-	public $InventoryItemID; // anyType
-	public $SerialNumber; // anyType
-}
-
-class InventoryItem {
-	public $ProductID; // anyType
-	public $InventoryLocationID; // anyType
-	public $QuantityOnHand; // anyType
-	public $QuantityMinimum; // anyType
-	public $QuantityMaximum; // anyType
-	public $ReferenceNumber; // anyType
-	public $Bin; // anyType
-	public $OnOrder; // anyType
-	public $BackOrder; // anyType
-}
-
-class InventoryLocation {
-	public $LocationName; // anyType
+class Contact {
 	public $Active; // anyType
-}
-
-class Opportunity {
-	public $AccountID; // anyType
-	public $AdvancedField1; // anyType
-	public $AdvancedField2; // anyType
-	public $AdvancedField3; // anyType
-	public $AdvancedField4; // anyType
-	public $AdvancedField5; // anyType
-	public $Amount; // anyType
-	public $Barriers; // anyType
-	public $ContactID; // anyType
-	public $Cost; // anyType
+	public $AddressLine; // anyType
+	public $AddressLine1; // anyType
+	public $AlternatePhone; // anyType
+	public $City; // anyType
+	public $Country; // anyType
 	public $CreateDate; // anyType
-	public $HelpNeeded; // anyType
-	public $LeadReferral; // anyType
-	public $Market; // anyType
-	public $NextStep; // anyType
-	public $OwnerResourceID; // anyType
-	public $Probability; // anyType
-	public $ProductID; // anyType
-	public $ProjectedCloseDate; // anyType
-	public $ProjectedLiveDate; // anyType
-	public $PromotionName; // anyType
-	public $RevenueSpread; // anyType
-	public $RevenueSpreadUnit; // anyType
-	public $Stage; // anyType
-	public $Status; // anyType
-	public $ThroughDate; // anyType
+	public $EMailAddress; // anyType
+	public $Extension; // anyType
+	public $FaxNumber; // anyType
+	public $FirstName; // anyType
+	public $AccountID; // anyType
+	public $LastName; // anyType
+	public $LastActivityDate; // anyType
+	public $LastModifiedDate; // anyType
+	public $MiddleInitial; // anyType
+	public $MobilePhone; // anyType
+	public $Note; // anyType
+	public $Notification; // anyType
+	public $Phone; // anyType
+	public $RoomNumber; // anyType
+	public $State; // anyType
 	public $Title; // anyType
-	public $UseQuoteTotals; // anyType
-	public $Rating; // anyType
-	public $TotalAmountMonths; // anyType
+	public $ZipCode; // anyType
 }
 
 class ContractServiceBundleUnit {
@@ -508,96 +294,160 @@ class ContractService {
 	public $AdjustedPrice; // anyType
 }
 
-class TimeEntry extends Entity{
-	public $TaskID; // anyType
-	public $TicketID; // anyType
-	public $InternalAllocationCodeID; // anyType
-	public $Type; // anyType
-	public $DateWorked; // anyType
-	public $StartDateTime; // anyType
-	public $EndDateTime; // anyType
-	public $HoursWorked; // anyType
-	public $HoursToBill; // anyType
-	public $OffsetHours; // anyType
-	public $SummaryNotes; // anyType
-	public $InternalNotes; // anyType
-	public $RoleID; // anyType
-	public $CreateDateTime; // anyType
-	public $ResourceID; // anyType
-	public $CreatorUserID; // anyType
-	public $LastModifiedUserID; // anyType
-	public $LastModifiedDateTime; // anyType
-	public $AllocationCodeID; // anyType
-	public $ContractID; // anyType
-	public $ShowOnInvoice; // anyType
-	public $NonBillable; // anyType
+class CreateAttachment {
+	public $attachment; // Attachment
 }
 
-class Appointment {
-	public $ResourceID; // anyType
-	public $Title; // anyType
-	public $StartDateTime; // anyType
-	public $EndDateTime; // anyType
-	public $Description; // anyType
-	public $CreatorResourceID; // anyType
-	public $CreateDateTime; // anyType
-	public $UpdateDateTime; // anyType
+class CreateAttachmentResponse {
+	public $CreateAttachmentResult; // long
 }
 
-class ServiceCallTask {
-	public $ServiceCallID; // anyType
-	public $TaskID; // anyType
+class DeleteAttachment {
+	public $attachmentId; // long
 }
 
-class ServiceCallTicket {
-	public $ServiceCallID; // anyType
-	public $TicketID; // anyType
+class DeleteAttachmentResponse {
+	public $DeleteAttachmentResult; // string
 }
 
-class ServiceCall {
+class Entity {
+	public $Fields; // ArrayOfField
+	public $id; // long
+	public $UserDefinedFields; // ArrayOfUserDefinedField
+}
+
+class Field {
+	public $Name; // string
+	public $Label; // string
+	public $Type; // string
+	public $Length; // int
+	public $Description; // string
+	public $IsRequired; // boolean
+	public $IsReadOnly; // boolean
+	public $IsQueryable; // boolean
+	public $IsReference; // boolean
+	public $ReferenceEntityType; // string
+	public $IsPickList; // boolean
+	public $PicklistValues; // ArrayOfPickListValue
+	public $PicklistParentValueField; // string
+	public $DefaultValue; // string
+}
+
+class GetAttachment {
+	public $attachmentId; // long
+}
+
+class GetAttachmentResponse {
+	public $GetAttachmentResult; // Attachment
+}
+
+class InventoryTransfer {
+	public $ProductID; // anyType
+	public $FromLocationID; // anyType
+	public $ToLocationID; // anyType
+	public $QuantityTransferred; // anyType
+	public $TransferByResourceID; // anyType
+	public $TransferDate; // anyType
+	public $Notes; // anyType
+	public $SerialNumber; // anyType
+}
+
+class InventoryItemSerialNumber {
+	public $InventoryItemID; // anyType
+	public $SerialNumber; // anyType
+}
+
+class InventoryItem {
+	public $ProductID; // anyType
+	public $InventoryLocationID; // anyType
+	public $QuantityOnHand; // anyType
+	public $QuantityMinimum; // anyType
+	public $QuantityMaximum; // anyType
+	public $ReferenceNumber; // anyType
+	public $Bin; // anyType
+	public $OnOrder; // anyType
+	public $BackOrder; // anyType
+}
+
+class InventoryLocation {
+	public $LocationName; // anyType
+	public $Active; // anyType
+}
+
+class Invoice {
 	public $AccountID; // anyType
-	public $StartDateTime; // anyType
-	public $EndDateTime; // anyType
-	public $Description; // anyType
-	public $Complete; // anyType
 	public $CreatorResourceID; // anyType
+	public $InvoiceDateTime; // anyType
 	public $CreateDateTime; // anyType
-	public $LastModifiedDateTime; // anyType
+	public $InvoiceNumber; // anyType
+	public $Comments; // anyType
+	public $InvoiceTotal; // anyType
+	public $TaxGroup; // anyType
+	public $FromDate; // anyType
+	public $ToDate; // anyType
+	public $OrderNumber; // anyType
+	public $PaymentTerm; // anyType
+	public $WebServiceDate; // anyType
+	public $IsVoided; // anyType
+	public $VoidedDate; // anyType
+	public $VoidedByResourceID; // anyType
 }
 
-class ServiceCallTaskResource {
-	public $ServiceCallTaskID; // anyType
-	public $ResourceID; // anyType
+class Opportunity {
+	public $AccountID; // anyType
+	public $AdvancedField1; // anyType
+	public $AdvancedField2; // anyType
+	public $AdvancedField3; // anyType
+	public $AdvancedField4; // anyType
+	public $AdvancedField5; // anyType
+	public $Amount; // anyType
+	public $Barriers; // anyType
+	public $ContactID; // anyType
+	public $Cost; // anyType
+	public $CreateDate; // anyType
+	public $HelpNeeded; // anyType
+	public $LeadReferral; // anyType
+	public $Market; // anyType
+	public $NextStep; // anyType
+	public $OwnerResourceID; // anyType
+	public $Probability; // anyType
+	public $ProductID; // anyType
+	public $ProjectedCloseDate; // anyType
+	public $ProjectedLiveDate; // anyType
+	public $PromotionName; // anyType
+	public $RevenueSpread; // anyType
+	public $RevenueSpreadUnit; // anyType
+	public $Stage; // anyType
+	public $Status; // anyType
+	public $ThroughDate; // anyType
+	public $Title; // anyType
+	public $UseQuoteTotals; // anyType
+	public $Rating; // anyType
+	public $TotalAmountMonths; // anyType
 }
 
-class ServiceCallTicketResource {
-	public $ServiceCallTicketID; // anyType
-	public $ResourceID; // anyType
+class PickListValue {
+	public $Value; // string
+	public $Label; // string
+	public $IsDefaultValue; // boolean
+	public $SortOrder; // int
+	public $parentValue; // string
 }
 
-class Task {
-	public $PhaseID; // anyType
+class Phase {
+	public $ParentPhaseID; // anyType
 	public $ProjectID; // anyType
 	public $Title; // anyType
 	public $Description; // anyType
-	public $StartDateTime; // anyType
-	public $EndDateTime; // anyType
-	public $DepartmentID; // anyType
-	public $AllocationCodeID; // anyType
-	public $AssignedResourceID; // anyType
-	public $AssignedResourceRoleID; // anyType
-	public $TaskIsBillable; // anyType
-	public $TaskType; // anyType
-	public $Status; // anyType
-	public $CompletedDateTime; // anyType
-	public $CreateDateTime; // anyType
+	public $StartDate; // anyType
+	public $DueDate; // anyType
+	public $Scheduled; // anyType
+	public $CreateDate; // anyType
 	public $CreatorResourceID; // anyType
 	public $EstimatedHours; // anyType
-	public $TaskNumber; // anyType
+	public $PhaseNumber; // anyType
 	public $ExternalID; // anyType
 	public $LastActivityDateTime; // anyType
-	public $Priority; // anyType
-	public $PurchaseOrderNumber; // anyType
 }
 
 class Product {
@@ -670,20 +520,231 @@ class Project {
 	public $PurchaseOrderNumber; // anyType
 }
 
-class Phase {
-	public $ParentPhaseID; // anyType
+class PurchaseOrderItem {
+	public $OrderID; // anyType
+	public $ProductID; // anyType
+	public $InventoryLocationID; // anyType
+	public $Quantity; // anyType
+	public $Memo; // anyType
+	public $UnitCost; // anyType
+}
+
+class PurchaseOrder {
+	public $VendorID; // anyType
+	public $Status; // anyType
+	public $CreatorResourceID; // anyType
+	public $CreateDateTime; // anyType
+	public $SubmitDateTime; // anyType
+	public $CancelDateTime; // anyType
+	public $ShipToName; // anyType
+	public $ShipToAddress1; // anyType
+	public $ShipToAddress2; // anyType
+	public $ShipToCity; // anyType
+	public $ShipToState; // anyType
+	public $ShipToPostalCode; // anyType
+	public $GeneralMemo; // anyType
+	public $Phone; // anyType
+	public $Fax; // anyType
+	public $VendorInvoiceNumber; // anyType
+	public $ExternalPONumber; // anyType
+	public $PurchaseForAccountID; // anyType
+	public $ShippingType; // anyType
+	public $ShippingDate; // anyType
+	public $Freight; // anyType
+	public $TaxGroup; // anyType
+	public $PaymentTerm; // anyType
+}
+
+class PurchaseOrderReceive {
+	public $PurchaseOrderItemID; // anyType
+	public $QuantityPreviouslyReceived; // anyType
+	public $QuantityNowReceiving; // anyType
+	public $ReceiveDate; // anyType
+	public $QuantityBackOrdered; // anyType
+	public $ReceivedByResourceID; // anyType
+	public $SerialNumber; // anyType
+}
+
+class Quote {
+	public $OpportunityID; // anyType
+	public $Name; // anyType
+	public $eQuoteActive; // anyType
+	public $EffectiveDate; // anyType
+	public $ExpirationDate; // anyType
+	public $CreateDate; // anyType
+	public $CreatorResourceID; // anyType
+	public $ContactID; // anyType
+	public $TaxGroup; // anyType
+	public $ProposalProjectID; // anyType
+	public $BillToLocationID; // anyType
+	public $ShipToLocationID; // anyType
+	public $SoldToLocationID; // anyType
+	public $ShippingType; // anyType
+	public $PaymentType; // anyType
+	public $PaymentTerm; // anyType
+	public $ExternalQuoteNumber; // anyType
+	public $PurchaseOrderNumber; // anyType
+	public $Comment; // anyType
+	public $Description; // anyType
+	public $AccountID; // anyType
+	public $CalculateTaxSeparately; // anyType
+	public $GroupByProductCategory; // anyType
+	public $ShowEachTaxInGroup; // anyType
+}
+
+class QuoteItem {
+	public $QuoteID; // anyType
+	public $Type; // anyType
+	public $ProductID; // anyType
+	public $CostID; // anyType
+	public $LaborID; // anyType
+	public $ExpenseID; // anyType
+	public $ShippingID; // anyType
+	public $ServiceID; // anyType
+	public $ServiceBundleID; // anyType
+	public $Name; // anyType
+	public $UnitPrice; // anyType
+	public $UnitCost; // anyType
+	public $Quantity; // anyType
+	public $IsTaxable; // anyType
+	public $IsOptional; // anyType
+	public $PeriodType; // anyType
+	public $Description; // anyType
+	public $UnitDiscount; // anyType
+	public $PercentageDiscount; // anyType
+	public $LineDiscount; // anyType
+}
+
+class QuoteLocation {
+	public $Address1; // anyType
+	public $Address2; // anyType
+	public $City; // anyType
+	public $State; // anyType
+	public $PostalCode; // anyType
+}
+
+class Service {
+	public $Name; // anyType
+	public $Description; // anyType
+	public $UnitPrice; // anyType
+	public $PeriodType; // anyType
+	public $AllocationCodeID; // anyType
+	public $IsActive; // anyType
+	public $CreatorResourceID; // anyType
+	public $UpdateResourceID; // anyType
+	public $CreateDate; // anyType
+	public $LastModifiedDate; // anyType
+	public $VendorAccountID; // anyType
+	public $UnitCost; // anyType
+}
+
+class ServiceBundle {
+	public $Name; // anyType
+	public $Description; // anyType
+	public $old_selected_service_sum; // anyType
+	public $UnitPrice; // anyType
+	public $UnitDiscount; // anyType
+	public $PercentageDiscount; // anyType
+	public $PeriodType; // anyType
+	public $AllocationCodeID; // anyType
+	public $IsActive; // anyType
+	public $CreatorResourceID; // anyType
+	public $UpdateResourceID; // anyType
+	public $CreateDate; // anyType
+	public $LastModifiedDate; // anyType
+	public $UnitCost; // anyType
+}
+
+class ServiceCall {
+	public $AccountID; // anyType
+	public $StartDateTime; // anyType
+	public $EndDateTime; // anyType
+	public $Description; // anyType
+	public $Complete; // anyType
+	public $CreatorResourceID; // anyType
+	public $CreateDateTime; // anyType
+	public $LastModifiedDateTime; // anyType
+}
+
+class ServiceCallTask {
+	public $ServiceCallID; // anyType
+	public $TaskID; // anyType
+}
+
+class ServiceCallTaskResource {
+	public $ServiceCallTaskID; // anyType
+	public $ResourceID; // anyType
+}
+
+class ServiceCallTicket {
+	public $ServiceCallID; // anyType
+	public $TicketID; // anyType
+}
+
+class ServiceCallTicketResource {
+	public $ServiceCallTicketID; // anyType
+	public $ResourceID; // anyType
+}
+
+class ShippingType {
+	public $Name; // anyType
+	public $IsActive; // anyType
+	public $Description; // anyType
+}
+
+class Task {
+	public $PhaseID; // anyType
 	public $ProjectID; // anyType
 	public $Title; // anyType
 	public $Description; // anyType
-	public $StartDate; // anyType
-	public $DueDate; // anyType
-	public $Scheduled; // anyType
-	public $CreateDate; // anyType
+	public $StartDateTime; // anyType
+	public $EndDateTime; // anyType
+	public $DepartmentID; // anyType
+	public $AllocationCodeID; // anyType
+	public $AssignedResourceID; // anyType
+	public $AssignedResourceRoleID; // anyType
+	public $TaskIsBillable; // anyType
+	public $TaskType; // anyType
+	public $Status; // anyType
+	public $CompletedDateTime; // anyType
+	public $CreateDateTime; // anyType
 	public $CreatorResourceID; // anyType
 	public $EstimatedHours; // anyType
-	public $PhaseNumber; // anyType
+	public $TaskNumber; // anyType
 	public $ExternalID; // anyType
 	public $LastActivityDateTime; // anyType
+	public $Priority; // anyType
+	public $PurchaseOrderNumber; // anyType
+}
+
+class TimeEntry extends Entity{
+	public $TaskID; // anyType
+	public $TicketID; // anyType
+	public $InternalAllocationCodeID; // anyType
+	public $Type; // anyType
+	public $DateWorked; // anyType
+	public $StartDateTime; // anyType
+	public $EndDateTime; // anyType
+	public $HoursWorked; // anyType
+	public $HoursToBill; // anyType
+	public $OffsetHours; // anyType
+	public $SummaryNotes; // anyType
+	public $InternalNotes; // anyType
+	public $RoleID; // anyType
+	public $CreateDateTime; // anyType
+	public $ResourceID; // anyType
+	public $CreatorUserID; // anyType
+	public $LastModifiedUserID; // anyType
+	public $LastModifiedDateTime; // anyType
+	public $AllocationCodeID; // anyType
+	public $ContractID; // anyType
+	public $ShowOnInvoice; // anyType
+	public $NonBillable; // anyType
+}
+
+class UserDefinedField {
+	public $Name; // string
+	public $Value; // string
 }
 
 class Role {
@@ -691,40 +752,6 @@ class Role {
 	public $Description; // anyType
 	public $HourlyFactor; // anyType
 	public $HourlyRate; // anyType
-}
-
-class Invoice {
-	public $AccountID; // anyType
-	public $CreatorResourceID; // anyType
-	public $InvoiceDateTime; // anyType
-	public $CreateDateTime; // anyType
-	public $InvoiceNumber; // anyType
-	public $Comments; // anyType
-	public $InvoiceTotal; // anyType
-	public $TaxGroup; // anyType
-	public $FromDate; // anyType
-	public $ToDate; // anyType
-	public $OrderNumber; // anyType
-	public $PaymentTerm; // anyType
-	public $WebServiceDate; // anyType
-	public $IsVoided; // anyType
-	public $VoidedDate; // anyType
-	public $VoidedByResourceID; // anyType
-}
-
-class AllocationCode {
-	public $GeneralLedgerCode; // anyType
-	public $Department; // anyType
-	public $Name; // anyType
-	public $Type; // anyType
-	public $UseType; // anyType
-	public $Description; // anyType
-	public $Active; // anyType
-	public $UnitCost; // anyType
-	public $UnitPrice; // anyType
-	public $AllocationCodeType; // anyType
-	public $Taxable; // anyType
-	public $ExternalNumber; // anyType
 }
 
 class Ticket extends Entity{
@@ -760,33 +787,7 @@ class Ticket extends Entity{
 	public $ServiceLevelAgreementHasBeenMet; // anyType
 	public $Resolution; // anyType
 	public $PurchaseOrderNumber; // anyType
-}
-
-class Contact {
-	public $Active; // anyType
-	public $AddressLine; // anyType
-	public $AddressLine1; // anyType
-	public $AlternatePhone; // anyType
-	public $City; // anyType
-	public $Country; // anyType
-	public $CreateDate; // anyType
-	public $EMailAddress; // anyType
-	public $Extension; // anyType
-	public $FaxNumber; // anyType
-	public $FirstName; // anyType
-	public $AccountID; // anyType
-	public $LastName; // anyType
-	public $LastActivityDate; // anyType
-	public $LastModifiedDate; // anyType
-	public $MiddleInitial; // anyType
-	public $MobilePhone; // anyType
-	public $Note; // anyType
-	public $Notification; // anyType
-	public $Phone; // anyType
-	public $RoomNumber; // anyType
-	public $State; // anyType
-	public $Title; // anyType
-	public $ZipCode; // anyType
+	public $TicketType; // it's an int id
 }
 
 class TicketNote {
