@@ -27,12 +27,20 @@ class atws extends SoapClient {
 	private function _connect() {
 		if($this->_connected == true) {
 			return true;
+		}
+		try {
+			$this->client = new soapclient($this->_url,$this->soap_options);
+		}	
+		catch ( SoapFault $fault ) {
+			$this->last_connect_fault = $fault;
+			$this->_connected = false;
+			return false;
 		}		
-		$this->client = new soapclient($this->_url,$this->soap_options);
 		if($this->client) {
 			$this->_connected = true;
 			return true;
 		}
+		$this->_connected = false;
 		return false;
 	}
 
@@ -42,7 +50,7 @@ class atws extends SoapClient {
     	
     }
 
-	public function getPicklist( $entity, $picklist ) {
+	public function getPicklist( $entity, $picklist , $attempt = 1 ) {
 
 		if (isset($this->picklists[$entity])) {
 			if(isset($this->picklists[$entity][$picklist])) {
@@ -56,8 +64,13 @@ class atws extends SoapClient {
 			$picklist_result = $this->client->getFieldInfo($GetFieldInfo);
 		} 
 		catch ( SoapFault $fault ) {
-			print( ' - Error occured while performing query: "' . $fault->faultcode .' - ' . $fault->faultstring);
-			exit(394);
+			$this->last_picklist_fault = $fault;
+			if($attempt > 3 ) {
+				return false;
+			}
+			else {
+				return $this->getPicklist($entity , $picklist, $attempt++);
+			}
 		}
 
 		if (!is_array($picklist_result->GetFieldInfoResult->Field)) {
