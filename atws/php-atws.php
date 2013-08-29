@@ -1,4 +1,5 @@
-<?php
+<?php 
+namespace atws;
 /*
  * Created on 27 Aug 2013
  * 
@@ -6,7 +7,7 @@
 
 require_once(__DIR__.DIRECTORY_SEPARATOR.'php-atws-classmap.php'); 
 
-class atws extends SoapClient {
+class atws extends \SoapClient {
 
 	private $_connected = false;
 	
