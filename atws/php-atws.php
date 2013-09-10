@@ -46,8 +46,8 @@ class atws {
 	}
 
     public function getObject($objectType) {
-    	
-    	return new $objectType();
+    	$obj = 'atws\\'.$objectType;
+    	return new $obj();
     	
     }
 
@@ -128,7 +128,7 @@ class atws {
 		}
 		$ATWSQuery = $this->getObject('Query');
 		if (is_object($query)) {
-		    if (is_a($query, 'atwsquery')) {
+		    if (is_a($query, 'atws\atwsquery')) {
 		    	$ATWSQuery->sXML=$query->getQueryXml();
 		    }
 		}
@@ -156,7 +156,7 @@ class atws {
 	}
 	
 	public function getQueryResults($queryOrResults) {
-		if (is_a($queryOrResults,'atwsquery')) {
+		if (is_a($queryOrResults,'atws\atwsquery')) {
 			return $this->getQueryResults($this->query($queryOrResults));
 		}
 		if(!isset($queryOrResults->queryResult->ReturnCode)) {

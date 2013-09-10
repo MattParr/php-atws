@@ -33,6 +33,7 @@ $query->qWHERE('idfasdf',$query->GreaterThan,23000);
 
 printquery($query,$at);
 
+
 function printquery(&$query,&$at) {
 	print "\r\n******* xml sent ******\r\n";
 	print $query->getQueryXml();
