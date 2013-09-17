@@ -25,6 +25,10 @@ class atws {
 		return $this->_connect();
 	}
 
+	public function connected() {
+		return $this->_connected;
+	}
+
 	private function _connect() {
 		if($this->_connected == true) {
 			return true;
