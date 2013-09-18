@@ -234,25 +234,15 @@ class atwsquery {
 
 	private $_spaces = 3;
 
-    public function qFROM($entity){
+    public function qFrom($entity){
         $this->_entity=$entity;
     }
-
-    public function qWHERE($field_name,$field_condition,$field_value,$udf=false) {
+    
+    public function qField($field_name,$field_condition,$field_value,$udf=false) {
         $this->_addFieldCriteria($field_name, $field_condition, $field_value,$udf);
     }
-    public function qOR($field_name,$field_condition,$field_value,$udf=false){
-    	$this->_startNestedCondition('OR');
-        $this->_addFieldCriteria($field_name, $field_condition, $field_value,$udf);
-        $this->_endNestedCondition();
-    }
-    public function qAND($field_name,$field_condition,$field_value,$udf=false) {
-        $this->_startNestedCondition();
-        $this->_addFieldCriteria($field_name, $field_condition, $field_value,$udf);
-        $this->_endNestedCondition();
-    }
-    public function openBracket() {
-        $this->_operations[]=array('TYPE'=>'BRACKET','STATUS'=>true);
+    public function openBracket($operator = '') {
+        $this->_operations[]=array('TYPE'=>'BRACKET','STATUS'=>true,'OPERATOR'=>$operator);
     }
     public function closeBracket() {
         $this->_operations[]=array('TYPE'=>'BRACKET','STATUS'=>false);
@@ -363,8 +353,14 @@ class atwsquery {
             $this->_xml.="\n$cspacer</condition>";   		
     	}
 		else {
+			if ($operation['OPERATOR'] == '') {
+				$operator = "";
+			}
+			else {
+				$operator = ' operator="' + $operation['OPERATOR'] + '"';
+			}
             $cspacer=str_repeat(" ",$this->_spaces);
-            $cxml="\n$cspacer<condition>";
+            $cxml="\n$cspacer<condition$operator>";
             $this->_xml.=$cxml;
             $this->_spaces++;
 		}
