@@ -253,7 +253,14 @@ class atwsquery {
     }
     
     public function qField($field_name,$field_condition,$field_value,$udf=false) {
-        $this->_addFieldCriteria($field_name, $field_condition, $field_value,$udf);
+
+    	if($field_value instanceof DateTime) {
+    		// automatically convert to the correct timestamp format
+    		// for the api
+    		$value = $this->formatDateStamp($value);
+    	}
+
+        $this->_addFieldCriteria($field_name, $field_condition, $value,$udf);
     }
     public function openBracket($operator = '') {
         $this->_operations[]=array('TYPE'=>'BRACKET','STATUS'=>true,'OPERATOR'=>$operator);
@@ -276,12 +283,7 @@ class atwsquery {
 
     private function _addFieldCriteria($name,$condition,$value,$udf=false) {
         
-    	if($value instanceof DateTime) {
-    		// automatically convert to the correct timestamp format
-    		// for the api
-    		$value = $this->formatDateStamp($value);
-    	}
-        
+       
         $this->_operations[]=array(
 			'TYPE'=>'FIELD',
 			'NAME'=>$name,
